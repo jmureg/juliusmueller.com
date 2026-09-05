@@ -37,7 +37,12 @@ export default function Home() {
   }, [active]);
 
   return <main>
-    <section className="gallery" aria-label="Selected photography">
+    <header className="logo-header">
+      <a href="#gallery" aria-label="Julius Mueller photography home">
+        <img src="/logo.png" alt="Julius Mueller — Landscape, Travel, California" />
+      </a>
+    </header>
+    <section className="gallery" id="gallery" aria-label="Selected photography">
       {photographs.map(([file, title, place, shape], index) => <button className={`photo-card ${shape}`} key={file} onClick={() => setActive(index)} aria-label={`View ${title}`}>
         <img src={`/photos/${file}`} alt={`${title}, ${place}`} loading={index < 3 ? "eager" : "lazy"} />
       </button>)}

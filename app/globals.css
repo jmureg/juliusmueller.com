@@ -5,6 +5,9 @@ html { scroll-behavior:smooth; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-sans),sans-serif; }
 a { color:inherit; text-decoration:none; }
 button { font:inherit; }
+.logo-header { position:sticky; top:0; z-index:20; display:flex; justify-content:center; align-items:center; min-height:88px; padding:10px 4vw; background:#080b0d; border-bottom:1px solid rgba(255,255,255,.1); }
+.logo-header a { display:block; width:190px; line-height:0; }
+.logo-header img { display:block; width:100%; height:auto; }
 .site-header { position:sticky; top:0; z-index:20; height:78px; padding:0 3vw; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); background:rgba(242,240,233,.9); backdrop-filter:blur(16px); }
 .brand { font-weight:700; letter-spacing:-.04em; font-size:1.05rem; }
 .brand span { color:#819178; margin:0 .3em; }
@@ -45,6 +48,8 @@ footer { padding:2.5rem 3vw; display:flex; justify-content:space-between; text-t
 .lightbox-caption { position:absolute; bottom:1.5rem; left:7vw; right:7vw; display:flex; justify-content:space-between; font-size:.7rem; text-transform:uppercase; letter-spacing:.12em; }
 @keyframes fade { from{opacity:0} to{opacity:1} }
 @media (max-width:700px) {
+  .logo-header { min-height:70px; padding-block:8px; }
+  .logo-header a { width:145px; }
   .site-header { height:68px; padding-inline:5vw; }
   .menu-button { display:flex; flex-direction:column; gap:6px; padding:10px; }
   .menu-button span { width:24px; height:1px; background:currentColor; }
