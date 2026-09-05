@@ -23,7 +23,6 @@ const photographs = [
 ] as const;
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<number | null>(null);
 
   useEffect(() => {
@@ -38,36 +37,16 @@ export default function Home() {
   }, [active]);
 
   return <main>
-    <header className="site-header">
-      <a className="brand" href="#top" aria-label="Julius Mueller home">JM<span>—</span>PHOTO</a>
-      <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation"><span /><span /></button>
-      <nav className={menuOpen ? "nav open" : "nav"} aria-label="Primary navigation">
-        <a href="#work" onClick={() => setMenuOpen(false)}>Work</a><a href="#about" onClick={() => setMenuOpen(false)}>About</a><a href="mailto:hello@juliusmueller.com">Contact</a>
-      </nav>
-    </header>
-
-    <section className="intro" id="top">
-      <p className="eyebrow">Landscape · Travel · California</p>
-      <h1>Chasing the quiet<br />between <em>light</em> and land.</h1>
-      <div className="intro-footer"><p>Selected photographs from the American West—wide horizons, patient light, and the places that stay with you.</p><a href="#work">Explore the work <span>↓</span></a></div>
-    </section>
-
-    <section className="gallery" id="work" aria-label="Selected photography">
+    <section className="gallery" aria-label="Selected photography">
       {photographs.map(([file, title, place, shape], index) => <button className={`photo-card ${shape}`} key={file} onClick={() => setActive(index)} aria-label={`View ${title}`}>
         <img src={`/photos/${file}`} alt={`${title}, ${place}`} loading={index < 3 ? "eager" : "lazy"} />
-        <span className="photo-shade" /><span className="photo-number">{String(index + 1).padStart(2, "0")}</span><span className="photo-meta"><strong>{title}</strong><small>{place}</small></span>
       </button>)}
     </section>
 
-    <section className="about" id="about"><p className="eyebrow">Behind the lens</p><div><h2>Drawn to open roads,<br />wild weather, and <em>honest</em> moments.</h2><p>I’m Julius, a photographer documenting landscapes and fleeting moments across California and beyond. My work is about slowing down enough to notice what the light is doing.</p><a href="mailto:hello@juliusmueller.com">Start a conversation ↗</a></div></section>
-
-    <footer><span>© {new Date().getFullYear()} Julius Mueller</span><span>California, USA</span><a href="#top">Back to top ↑</a></footer>
-
     {active !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={photographs[active][1]} onClick={() => setActive(null)}>
-      <button className="close" onClick={() => setActive(null)} aria-label="Close image">Close ×</button>
+      <button className="close" onClick={() => setActive(null)} aria-label="Close image">×</button>
       <button className="previous" onClick={e => { e.stopPropagation(); setActive((active - 1 + photographs.length) % photographs.length); }} aria-label="Previous image">←</button>
       <img src={`/photos/${photographs[active][0]}`} alt={`${photographs[active][1]}, ${photographs[active][2]}`} onClick={e => e.stopPropagation()} />
-      <div className="lightbox-caption"><strong>{photographs[active][1]}</strong><span>{photographs[active][2]} · {active + 1}/{photographs.length}</span></div>
       <button className="next" onClick={e => { e.stopPropagation(); setActive((active + 1) % photographs.length); }} aria-label="Next image">→</button>
     </div>}
   </main>;
